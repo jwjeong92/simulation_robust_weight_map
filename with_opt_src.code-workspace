@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../git/transformers/src/transformers/models/opt"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,22 @@
+CUDA extension not installed.
+CUDA extension not installed.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.09s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.41it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.30it/s]
+  0%|          | 0/4 [00:00<?, ?it/s]  0%|          | 0/4 [10:09<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/jwjeong/workspace/simulation_robust_weight_map/scaled_act_analysis.py", line 90, in <module>
+    model(input_ids)
+  File "/home/jwjeong/anaconda3/envs/autogptq/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/jwjeong/anaconda3/envs/autogptq/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jwjeong/git/transformers/src/transformers/models/opt/modeling_opt.py", line 1051, in forward
+    logits = self.lm_head(outputs[0]).contiguous()
+  File "/home/jwjeong/anaconda3/envs/autogptq/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/jwjeong/anaconda3/envs/autogptq/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1595, in _call_impl
+    hook_result = hook(self, args, result)
+  File "/home/jwjeong/workspace/simulation_robust_weight_map/scaled_act_analysis.py", line 62, in stat_input_hook
+    stat_tensor(name, x)
+  File "/home/jwjeong/workspace/simulation_robust_weight_map/scaled_act_analysis.py", line 42, in stat_tensor
+    for i in range(len(scale[name])):
+KeyError: 'lm_head'
