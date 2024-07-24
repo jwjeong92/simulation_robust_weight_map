@@ -1,1 +1,4 @@
-./**/*.pt
+collected_act/**/*.pt
+scaled_act/**/*.pt
+softmax_res/**/*.pt
+loss_quantification/**/*.pt
