@@ -90,22 +90,23 @@ def quant_unpack(bits, gs, model):
     zeros = {}
     qs = {}
     for layer in layers.keys():
-        module = layers[layer].weight.data
-        row = module.size(0)
-        col = module.size(1)
-        scales[layer] = torch.zeros(row, col // group_size)
-        zeros[layer] = torch.zeros(row, col // group_size)
-        qs[layer] = torch.zeros((row, col), dtype=torch.int32)
-        for i in range(0, col, group_size):
-            x = module[:, i:i+group_size]
-            quantizer.find_params(x, weight=True)
-            maxq = quantizer.maxq
-            scale = quantizer.scale
-            zero = quantizer.zero
-            q = torch.clamp(torch.round(x/scale) + zero, 0, maxq)
-            qs[layer][:, i:i+group_size] = q
-            scales[layer][:, i//group_size] = scale.squeeze()
-            zeros[layer][:, i//group_size] = zero.squeeze()
+        if layer.split('.')[-1] != 'lm_head':
+            module = layers[layer].weight.data
+            row = module.size(0)
+            col = module.size(1)
+            scales[layer] = torch.zeros(row, col // group_size)
+            zeros[layer] = torch.zeros(row, col // group_size)
+            qs[layer] = torch.zeros((row, col), dtype=torch.int32)
+            for i in range(0, col, group_size):
+                x = module[:, i:i+group_size]
+                quantizer.find_params(x, weight=True)
+                maxq = quantizer.maxq
+                scale = quantizer.scale
+                zero = quantizer.zero
+                q = torch.clamp(torch.round(x/scale) + zero, 0, maxq)
+                qs[layer][:, i:i+group_size] = q
+                scales[layer][:, i//group_size] = scale.squeeze()
+                zeros[layer][:, i//group_size] = zero.squeeze()
         
     return scales, zeros, qs
 

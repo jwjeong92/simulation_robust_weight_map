@@ -140,7 +140,7 @@ def evaluate_opt(model, testenc):
     model = model.eval()
 
     nlls = []
-    for i in tqdm(range(nsamples), desc="evaluating..."):
+    for i in range(nsamples):
         batch = testenc[:, (i * 2048):((i + 1) * 2048)].to(model.device)
         with torch.no_grad():
             lm_logits = model(batch).logits

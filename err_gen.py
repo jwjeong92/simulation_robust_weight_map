@@ -45,7 +45,7 @@ def error_gen(param, rate, seed):
     del bin_error
     return error_matrix.view(orig_size)
 
-def error_injection(param, rate, seed, device="cuda:1"):
+def error_injection(param, rate, seed, device="cuda"):
     err_mat = error_gen(param, rate, seed).to(device)
     int_form = err_mat.dtype
     param.data[:] = (param.data.view(int_form) ^ err_mat).view(param.dtype)

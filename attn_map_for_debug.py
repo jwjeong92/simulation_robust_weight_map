@@ -3,7 +3,7 @@ from datasets import load_dataset
 from tqdm import tqdm
 
 model_name = 'facebook/opt-6.7b'
-device = "cuda:1"
+device = "cuda"
 model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 dataset = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
